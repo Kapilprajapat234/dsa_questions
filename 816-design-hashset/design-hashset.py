@@ -1,16 +1,18 @@
 class MyHashSet(object):
 
     def __init__(self):
-        self.void = []
-        
+        self.bucket = [[] for _ in range(10)]
 
     def add(self, key):
         """
         :type key: int
         :rtype: None
         """
-        if key not in self.void:
-            self.void.append(key)
+        index = key % 10 
+        if key not in self.bucket[index]:
+            self.bucket[index].append(key)
+        
+            
         
 
     def remove(self, key):
@@ -18,8 +20,9 @@ class MyHashSet(object):
         :type key: int
         :rtype: None
         """
-        if key in self.void:
-            self.void.remove(key)
+        index = key % 10 
+        if key in self.bucket[index]:
+            self.bucket[index].remove(key)
         else :
             pass
         
@@ -29,11 +32,9 @@ class MyHashSet(object):
         :type key: int
         :rtype: bool
         """
-        if key in self.void :
-            return True 
-        else :
-            return False 
-        
+        index = key % 10
+
+        return key in self.bucket[index]
 
 
 # Your MyHashSet object will be instantiated and called as such:
