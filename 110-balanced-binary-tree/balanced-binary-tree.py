@@ -6,12 +6,18 @@
 #         self.right = right
 
 class Solution(object):
-    def getdepth(self, root):
-        if root == None :
+    def check(self, root):
+        if root is None:
             return 0
-        left = self.getdepth(root.left)
-        right = self.getdepth(root.right)
 
+        left = self.check(root.left)
+        right = self.check(root.right)
+
+        if left == -1 or right == -1:
+            return -1
+
+        if abs(left - right) > 1:
+            return -1
 
         return 1 + max(left, right)
 
@@ -20,17 +26,7 @@ class Solution(object):
         :type root: Optional[TreeNode]
         :rtype: bool
         """
-        if root == None :
-            return True 
-        lefthight = self.getdepth(root.left)
-        righthight = self.getdepth(root.right)
-
-        left_balanced = self.isBalanced(root.left)
-        right_balanced = self.isBalanced(root.right)
-
-
-        return abs(lefthight - righthight) <= 1 and left_balanced and right_balanced
-
+        return self.check(root) != -1
         
         
 
