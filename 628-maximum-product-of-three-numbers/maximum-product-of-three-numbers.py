@@ -4,30 +4,30 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        largest = None 
-        second = None 
-        third = None 
+        largest1 = None 
+        largest2 = None 
+        largest3 = None 
         smallest = None 
-        second_small = None 
+        smallest2 = None 
 
         for n in nums:
         
-            if largest is None or n > largest:
-                third = second
-                second = largest 
-                largest = n
+            if largest1 is None or n > largest1:
+                largest3 = largest2
+                largest2 = largest1 
+                largest1 = n
 
-            elif second is None or n > second:
-                third = second
-                second = n
+            elif largest2 is None or n > largest2:
+                largest3 = largest2
+                largest2 = n
 
-            elif third is None or n > third:
-                third = n
+            elif largest3 is None or n > largest3:
+                largest3 = n
 
             if smallest  is None or n < smallest :
-                second_small = smallest 
+                smallest2 = smallest 
                 smallest = n 
-            elif second_small is None or n < second_small:
-                second_small = n 
+            elif smallest2 is None or n < smallest2:
+                smallest2 = n 
             
-        return max(largest * second * third , smallest * second_small * largest)
+        return max(largest1 * largest2 * largest3 , smallest * smallest2 * largest1)
